@@ -5,7 +5,7 @@ DOGTOR is a virtual assistant designed to **detect and correct errors from other
 
 ---
 
-## 🚀 Project Overview
+# 🚀 Project Overview
 
 DOGTOR aims to improve the quality of responses in sensitive contexts, especially emergencies. It not only acts as an assistant, but also as an **intelligent verifier**, capable of identifying inconsistencies and offering safer recommendations.
 
