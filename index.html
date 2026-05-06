@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOGTOR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f0f0; /* Fondo gris claro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff; /* Contenedor blanco */
+            padding: 3rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 700px;
+            width: 100%;
+        }
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .paw-button-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .paw-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: #000000; /* Botones negros */
+            border: none;
+            cursor: pointer;
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+        }
+        .paw-button:hover {
+            background-color: #333333; /* Gris oscuro en hover */
+            transform: translateY(-5px);
+            /* Sombra y efecto de luz */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .paw-icon {
+            font-size: 3rem; /* Tamaño grande para la huella */
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            color: #ffffff; /* Huellas blancas */
+        }
+        .title {
+            color: #000000; /* Título negro */
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .description {
+            color: #333333; /* Descripción gris oscuro */
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        .paw-text {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            margin-top: 0.5rem;
+            background-color: #000000;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            z-index: 10;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ffffff;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        .dropdown-item:hover {
+            background-color: #333333;
+        }
+        .dropdown-icon {
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+        .message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s, visibility 0.5s;
+            z-index: 100;
+        }
+        .message.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .video-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .video-container {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            aspect-ratio: 16 / 9;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        }
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+        }
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #fff;
+            color: #000;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 101;
+        }
+        .icon-container {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            border-radius: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            transition: opacity 0.2s;
+            opacity: 0;
+        }
+        .icon-container.show {
+            display: flex;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="message" id="message"></div>
+
+    <div class="video-modal" id="rcp-video-modal">
+        <div class="video-container">
+            <button class="close-button" id="close-rcp-video-button">&times;</button>
+            <iframe id="rcp-video-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="video-modal" id="primeros-auxilios-video-modal">
+        <div class="video-container">
+            <button class="close-button" id="close-primeros-auxilios-video-button">&times;</button>
+            <iframe id="primeros-auxilios-video-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">DOGTOR 🐶</h1>
+        <p class="description">Seleccione una opción para recibir asistencia.</p>
+
+        <div class="buttons-grid">
+            <div class="paw-button-container">
+                <button class="paw-button" id="urgencia-button">
+                    <span class="paw-icon">🐾</span>
+                    <span class="paw-text">URGENCIA</span>
+                </button>
+                <div id="urgencia-dropdown" class="dropdown-menu">
+                    <a href="#" class="dropdown-item">
+                        <span class="dropdown-icon">📞</span>
+                        Llamar
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <span class="dropdown-icon">📝</span>
+                        Escribir
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <span class="dropdown-icon">🎤</span>
+                        Micrófono
+                    </a>
+                </div>
+            </div>
+            <div class="paw-button-container">
+                <button class="paw-button" id="hospitales-button">
+                    <span class="paw-icon">🐾</span>
+                    <span class="paw-text">HOSPITALES</span>
+                </button>
+                <div id="hospitales-dropdown" class="dropdown-menu">
+                    <a href="#" class="dropdown-item">
+                        <span class="dropdown-icon">⭐</span>
+                        El Mejor
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <span class="dropdown-icon">🗺️</span>
+                        Mapa
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <span class="dropdown-icon">⏰</span>
+                        24/7
+                    </a>
+                </div>
+            </div>
+            <button class="paw-button" id="guambulancia-button">
+                <span class="paw-icon">🐾</span>
+                <span class="paw-text">GUAMBULANCIA</span>
+            </button>
+            <button class="paw-button" id="rcp-button">
+                <span class="paw-icon">🐾</span>
+                <span class="paw-text">RCP</span>
+            </button>
+            <button class="paw-button" id="primeros-auxilios-button">
+                <span class="paw-icon">🐾</span>
+                <span class="paw-text">PRIMEROS AUXILIOS</span>
+            </button>
+            <button class="paw-button" id="asistente-virtual-button">
+                <span class="paw-icon">🐾</span>
+                <span class="paw-text">ASISTENTE VIRTUAL</span>
+            </button>
+             <button class="paw-button" id="kit-button">
+                <span class="paw-icon">🐾</span>
+                <span class="paw-text">KIT</span>
+                <div class="icon-container" id="kit-icon-container">
+                    🛒
+                </div>
+            </button>
+            <button class="paw-button" id="medicina-button">
+                <span class="paw-icon">🐾</span>
+                <span class="paw-text">MEDICINA</span>
+                <div class="icon-container" id="medicina-icon-container">
+                    🛒
+                </div>
+            </button>
+             <button class="paw-button" id="premios-button">
+                <span class="paw-icon">🐾</span>
+                <span class="paw-text">PREMIOS</span>
+                <div class="icon-container" id="premios-icon-container">
+                    🛒
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Función para alternar el menú desplegable
+            const toggleDropdown = (buttonId, dropdownId) => {
+                const button = document.getElementById(buttonId);
+                const dropdown = document.getElementById(dropdownId);
+                
+                if (button && dropdown) {
+                    button.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        dropdown.classList.toggle('show');
+                        // Cierra otros menús desplegables
+                        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                            if (menu.id !== dropdownId) {
+                                menu.classList.remove('show');
+                            }
+                        });
+                    });
+                }
+            };
+
+            // Función para mostrar un mensaje temporal
+            const showMessage = (messageText) => {
+                const messageBox = document.getElementById('message');
+                messageBox.textContent = messageText;
+                messageBox.classList.add('show');
+                setTimeout(() => {
+                    messageBox.classList.remove('show');
+                }, 3000);
+            };
+
+            // Inicializa los menús para los botones "URGENCIA" y "HOSPITALES"
+            toggleDropdown('urgencia-button', 'urgencia-dropdown');
+            toggleDropdown('hospitales-button', 'hospitales-dropdown');
+
+            // Evento para el botón "GUAMBULANCIA"
+            const guambulanciaButton = document.getElementById('guambulancia-button');
+            if (guambulanciaButton) {
+                guambulanciaButton.addEventListener('click', () => {
+                    showMessage('La ambulancia va en camino');
+                });
+            }
+
+            // Función para abrir y cerrar el modal de video
+            const setupVideoModal = (buttonId, modalId, closeButtonId, videoIframeId, videoUrl) => {
+                const button = document.getElementById(buttonId);
+                const modal = document.getElementById(modalId);
+                const closeButton = document.getElementById(closeButtonId);
+                const iframe = document.getElementById(videoIframeId);
+
+                if (button && modal && closeButton && iframe) {
+                    button.addEventListener('click', () => {
+                        modal.classList.add('show');
+                        iframe.src = videoUrl;
+                    });
+
+                    closeButton.addEventListener('click', () => {
+                        modal.classList.remove('show');
+                        iframe.src = '';
+                    });
+
+                    modal.addEventListener('click', (event) => {
+                        if (event.target === modal) {
+                            modal.classList.remove('show');
+                            iframe.src = '';
+                        }
+                    });
+                }
+            };
+
+            // Configura el video de RCP
+            setupVideoModal('rcp-button', 'rcp-video-modal', 'close-rcp-video-button', 'rcp-video-iframe', 'https://www.youtube.com/embed/mMg12vlOwpg?autoplay=1');
+            
+            // Configura el video de Primeros Auxilios
+            setupVideoModal('primeros-auxilios-button', 'primeros-auxilios-video-modal', 'close-primeros-auxilios-video-button', 'primeros-auxilios-video-iframe', 'https://www.youtube.com/embed/CMMTe6mhX9A?autoplay=1');
+
+            // Evento para el botón "ASISTENTE VIRTUAL" que ahora redirige a una URL
+            const asistenteVirtualButton = document.getElementById('asistente-virtual-button');
+            if (asistenteVirtualButton) {
+                asistenteVirtualButton.addEventListener('click', () => {
+                    window.location.href = 'https://gemini.google.com/share/82e123c35fce';
+                });
+            }
+
+             // Evento para los botones KIT, MEDICINA y PREMIOS
+            const setupBuyButton = (buttonId, iconContainerId) => {
+                const button = document.getElementById(buttonId);
+                const iconContainer = document.getElementById(iconContainerId);
+                if (button && iconContainer) {
+                    button.addEventListener('click', () => {
+                        const allIcons = document.querySelectorAll('.icon-container');
+                        allIcons.forEach(icon => {
+                            if (icon.id !== iconContainerId) {
+                                icon.classList.remove('show');
+                            }
+                        });
+                        iconContainer.classList.toggle('show');
+                    });
+                }
+            };
+            
+            setupBuyButton('kit-button', 'kit-icon-container');
+            setupBuyButton('medicina-button', 'medicina-icon-container');
+            setupBuyButton('premios-button', 'premios-icon-container');
+
+
+            // Cierra todos los menús si se hace clic fuera de ellos
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('.paw-button-container')) {
+                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        menu.classList.remove('show');
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
