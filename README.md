@@ -1,7 +1,8 @@
 <h1 align="center">🐶 AI-DOGTOR </h1> 
+
 **Intelligent Virtual Assistant for First Aid**
 
-DOGTOR is a virtual assistant designed to **detect and correct errors from other assistants**, providing reliable, clear, and useful information in critical situations. It specializes in **first aid**, delivering fast and accessible guidance through an integrated web platform.
+AI DOGTOR is a virtual assistant designed to **detect and correct errors from other assistants**, providing reliable, clear, and useful information in critical situations. It specializes in **first aid**, delivering fast and accessible guidance through an integrated web platform.
 
 ---
 
