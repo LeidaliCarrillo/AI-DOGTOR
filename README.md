@@ -92,8 +92,9 @@ Real-time location-based responses
 Integration with official healthcare services
 👤 Author
 
-Leidalí Carrillo Fernández AI Engineer 
-🐾 DOGTOR
+Leidalí Carrillo Fernández AI Engineer / Developer
+
+🐾 AI DOGTOR
 
 Technology in service of life.
    
