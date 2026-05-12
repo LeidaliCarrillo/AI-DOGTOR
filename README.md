@@ -90,7 +90,9 @@ Mobile integration
 Voice recognition
 Real-time location-based responses
 Integration with official healthcare services
+👤 Author
 
+Leidalí Carrillo Fernández AI Engineer 
 🐾 DOGTOR
 
 Technology in service of life.
