@@ -72,7 +72,7 @@ The web application includes:
 ------------------
 ⚠️ Disclaimer
 
-DOGTOR is a support tool and does not replace professional medical care.
+AI DOGTOR is a support tool and does not replace professional medical care.
 In case of a real emergency, please contact local health services immediately.
 
 🤝 Contributing
