@@ -6,7 +6,7 @@ AI DOGTOR is a virtual assistant designed to **detect and correct errors from ot
 
 ---
 
-# 🚀 Project Overview
+## 🚀 Project Overview
 
 AI DOGTOR aims to improve the quality of responses in sensitive contexts, especially emergencies. It not only acts as an assistant, but also as an **intelligent verifier**, capable of identifying inconsistencies and offering safer recommendations.
 
