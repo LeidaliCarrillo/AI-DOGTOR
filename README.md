@@ -82,6 +82,7 @@ Contributions are welcome! You can:
 - Report bugs
 - Suggest improvements
 - Submit pull requests
+- Sugest something
 📄 License
 
 This project is licensed under the MIT License.
